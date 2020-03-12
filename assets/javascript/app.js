@@ -197,7 +197,7 @@ function rightAnswer() {
   clearInterval(intervalId);
   $("#slot").empty();
   $("#slot").append("<h1>correct!</h1>");
-  $("#slot").append("<img src='assets/images/spongebob.gif'>");
+  $("#slot").append("<img src='assets/images/patrick.gif'>");
   right++;
   onQuestion++;
   setTimeout(nextQuestion,2500);
