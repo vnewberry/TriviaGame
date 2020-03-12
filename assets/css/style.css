@@ -39,3 +39,7 @@ h1{
     color: red;
     
 }
+#time-left{
+    color: red;
+    font-size: 3vw;
+}

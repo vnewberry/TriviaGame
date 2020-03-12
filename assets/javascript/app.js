@@ -5,10 +5,10 @@
 
 
 function gameSet() {
-  
   onQuestion = 0;
   right = 0;
   wrong = 0;
+  
   // popArray();
   $("#slot").empty();
   $("#slot").append(
@@ -21,6 +21,9 @@ function gameSet() {
     renderQuestion(onQuestion);
   });
 }
+var timeLeft;
+
+var smallTimer;
 var right = 0;
 var wrong = 0;
 var onQuestion = 0;
@@ -101,11 +104,26 @@ function popArray(){
   })
 ];
 }
+
+function countDown(){
+  if (timeLeft<1){
+    queTimeOut();
+    
+  }
+  else{
+  $("#time-left").text(timeLeft);
+  timeLeft--;}
+
+}
+
 function renderQuestion(n) {
   $("#slot").empty();
+
   
   
   if (n < 10) {
+    timeLeft =10;
+    intervalId = setInterval(countDown,1000);
     //randomly generate the question that is rendered
     var thisQuestion = (Math.floor(Math.random() * (questionSet.length)));
     console.log("rand: "+thisQuestion);
@@ -131,6 +149,7 @@ function renderQuestion(n) {
     answers.splice(ansIndex,1);
   }
 
+
   questionSet.splice(thisQuestion,1);
     // $("#slot").append(`<h1>${questionSet[thisQuestion].q}</h1>`);
     // $("#slot").append(
@@ -148,29 +167,51 @@ function renderQuestion(n) {
     // questionSet.splice(thisQuestion,1);
 
     //   console.log(questionSet);
-  } else {
+    
+  } 
+  
+  else {
+    clearInterval(intervalId);
     endGame();
   }
+  
 }
+//function that is called when timer runs down
 
-function rightAnswer() {
+function queTimeOut(){
+  clearInterval(intervalId);
   $("#slot").empty();
-  $("#slot").append("<h1>correct!</h1>");
-  right++;
-  onQuestion++;
-  renderQuestion(onQuestion);
-  console.log("right: " + right, "wrong: " + wrong, "question: " + onQuestion);
-}
-function wrongAnswer() {
-  $("#slot").empty();
-  $("#slot").append("<h1>Wrong!</h1>");
+  $("#slot").append("<h1>Timeout</h1>");
+  
   wrong++;
   onQuestion++;
   renderQuestion(onQuestion);
-  console.log("right: " + right, "wrong: " + wrong, "question: " + onQuestion);
+}
+
+function rightAnswer() {
+  clearInterval(intervalId);
+  $("#slot").empty();
+  $("#slot").append("<h1>correct!</h1>");
+  
+  right++;
+  onQuestion++;
+  renderQuestion(onQuestion);
+ 
+}
+function wrongAnswer() {
+  clearInterval(intervalId);
+  $("#slot").empty();
+  $("#slot").append("<h1>Wrong!</h1>");
+  
+  wrong++;
+  onQuestion++;
+  setTimeout(renderQuestion(onQuestion),5000);
+  
 }
 
 function endGame() {
+  clearInterval(intervalId);
+  $("#time-left").empty();
   $("#slot").empty();
   $("#slot").append("<h1>Game Over</h1>");
   $("#slot").append(`<h1 id = "percent">${(right / 10) * 100}%</h1>`);
