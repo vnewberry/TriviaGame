@@ -1,7 +1,5 @@
 //still need to add a timeout to each question
 //-gif display from ajax call after each correct question
-//-populate and add more questions
-//randomly select questions and order of answer buttons
 
 
 
@@ -11,13 +9,15 @@ function gameSet() {
   onQuestion = 0;
   right = 0;
   wrong = 0;
-  popArray();
+  // popArray();
   $("#slot").empty();
   $("#slot").append(
     "<h1 id ='start-instructions'>Click the button to begin</h1>"
   );
   $("#slot").append("<button id ='start-button'>Start</button>");
+  popArray();
   $("#start-button").on("click", function(event) {
+
     renderQuestion(onQuestion);
   });
 }
@@ -40,29 +40,64 @@ function popArray(){
     q: "The short blade that Bilbo Baggins used and passed on to Frodo was called?",
     w1: "Orcrist",
     w2: "Butter Knife",
-    w3: "wrong answer 23",
-    r1: "right answer2"
+    w3: "Glamdring",
+    r1: "Stinger"
   }),
   (question = {
-    q: "3?",
-    w1: "wrong answer 31",
-    w2: "wrong answer 32",
-    w3: "wrong answer 33",
-    r1: "right answer3"
+    q: "Pluto was reclassified, in 2006, to what kind of astronomical object?",
+    w1: "Asteroid",
+    w2: "Worm Hole",
+    w3: "Moon",
+    r1: "Dwarf Planet"
   }),
   (question = {
-    q: "4?",
-    w1: "wrong answer 41",
-    w2: "wrong answer 42",
-    w3: "wrong answer 43",
-    r1: "right answer4"
+    q: "a Bloody Mary is a cocktail made with tomato juice and what kind of alcohol?",
+    w1: "Red Wine",
+    w2: "Bourban",
+    w3: "Sake",
+    r1: "Vodka"
   }),
   (question = {
-    q: "5?",
-    w1: "wrong answer 51",
-    w2: "wrong answer 52",
-    w3: "wrong answer 53",
-    r1: "right answer5"
+    q: "What 3 letter word means 'the front of the ship'?",
+    w1: "Aft",
+    w2: "Cog",
+    w3: "Starboard",
+    r1: "Bow"
+  }),
+  (question = {
+    q: "what is the term for the dots found on dominoes and dice?",
+    w1: "eyes",
+    w2: "pops",
+    w3: "dots",
+    r1: "Pips"
+  }),
+  (question = {
+    q: "How many squares are on a chess board?",
+    w1: "13",
+    w2: "42",
+    w3: "104",
+    r1: "64"
+  }),
+  (question = {
+    q: "At what university was Gatorade developed?",
+    w1: "Miami",
+    w2: "Vanderbilt",
+    w3: "University of Pheonix",
+    r1: "University of Florida"
+  }),
+  (question = {
+    q: "In Poker, 5 cards of the same suit is called a what?",
+    w1: "pair",
+    w2: "river",
+    w3: "ante",
+    r1: "Flush"
+  }),
+  (question = {
+    q: "Which Ship was Titanic's sister Ship?",
+    w1: "The Dawn Treader",
+    w2: "The USS Monitor",
+    w3: "The Nina",
+    r1: "The Olympic"
   })
 ];
 }
@@ -70,7 +105,7 @@ function renderQuestion(n) {
   $("#slot").empty();
   
   
-  if (n < 5) {
+  if (n < 10) {
     //randomly generate the question that is rendered
     var thisQuestion = (Math.floor(Math.random() * (questionSet.length)));
     console.log("rand: "+thisQuestion);
@@ -138,7 +173,7 @@ function wrongAnswer() {
 function endGame() {
   $("#slot").empty();
   $("#slot").append("<h1>Game Over</h1>");
-  $("#slot").append(`<h1 id = "percent">${(right / 5) * 100}%</h1>`);
+  $("#slot").append(`<h1 id = "percent">${(right / 10) * 100}%</h1>`);
   $("#slot").append(`<h2>Correct: ${right}</h2>`);
   $("#slot").append(`<h2>WRONG: ${wrong}</h2>`);
   $("#slot").append("<button id ='restart-button'>Restart</button>");
