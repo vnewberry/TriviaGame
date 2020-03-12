@@ -184,7 +184,7 @@ function queTimeOut(){
   $("#slot").empty();
   $("#slot").append("<h1>Timeout</h1>");
   $("#slot").append(`<h1>The correct answer was "${rAnswer}"</h1>`);
-  $("#slot").append("<img src='https://media.giphy.com/media/ZEgBHVeRlmTqjCPlqx/giphy.gif'>");
+  $("#slot").append("<img src='assets/images/spongebob.gif'>");
   wrong++;
   onQuestion++;
   setTimeout(nextQuestion,2500);
@@ -197,7 +197,7 @@ function rightAnswer() {
   clearInterval(intervalId);
   $("#slot").empty();
   $("#slot").append("<h1>correct!</h1>");
-  $("#slot").append("<img src='https://media.giphy.com/media/rdma0nDFZMR32/giphy.gif'>");
+  $("#slot").append("<img src='assets/images/spongebob.gif'>");
   right++;
   onQuestion++;
   setTimeout(nextQuestion,2500);
@@ -209,7 +209,7 @@ function wrongAnswer() {
   $("#slot").empty();
   $("#slot").append("<h1>Wrong!</h1>");
   $("#slot").append(`<h1>The correct answer was "${rAnswer}"</h1>`);
-  $("#slot").append("<img src='https://media.giphy.com/media/ZEgBHVeRlmTqjCPlqx/giphy.gif'>");
+  $("#slot").append("<img src='assets/images/spongebob.gif'>");
   wrong++;
   onQuestion++;
   setTimeout(nextQuestion,2500);
