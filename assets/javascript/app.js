@@ -1,5 +1,5 @@
-//still need to add a timeout to each question
-//-gif display from ajax call after each correct question
+
+
 
 
 
@@ -21,9 +21,8 @@ function gameSet() {
     renderQuestion(onQuestion);
   });
 }
+var rAnswer;
 var timeLeft;
-
-var smallTimer;
 var right = 0;
 var wrong = 0;
 var onQuestion = 0;
@@ -69,9 +68,9 @@ function popArray(){
   }),
   (question = {
     q: "what is the term for the dots found on dominoes and dice?",
-    w1: "eyes",
-    w2: "pops",
-    w3: "dots",
+    w1: "Eyes",
+    w2: "Pops",
+    w3: "Dots",
     r1: "Pips"
   }),
   (question = {
@@ -90,9 +89,9 @@ function popArray(){
   }),
   (question = {
     q: "In Poker, 5 cards of the same suit is called a what?",
-    w1: "pair",
-    w2: "river",
-    w3: "ante",
+    w1: "Pair",
+    w2: "River",
+    w3: "Ante",
     r1: "Flush"
   }),
   (question = {
@@ -111,7 +110,7 @@ function countDown(){
     
   }
   else{
-  $("#time-left").text(timeLeft);
+  $("#time-left").text("TIMER: "+timeLeft);
   timeLeft--;}
 
 }
@@ -142,10 +141,11 @@ function renderQuestion(n) {
     `<button class = 'answer right'>${questionSet[thisQuestion].r1}</button>`
   );
   var answers = [ans1,ans2,ans3,ans4];
-  
+  rAnswer = questionSet[thisQuestion].r1;
   for(i=0;i<4;i++){
     var ansIndex = (Math.floor(Math.random() * (answers.length)));
     $("#slot").append(answers[ansIndex]);
+
     answers.splice(ansIndex,1);
   }
 
@@ -179,33 +179,40 @@ function renderQuestion(n) {
 //function that is called when timer runs down
 
 function queTimeOut(){
+  $("#time-left").empty();
   clearInterval(intervalId);
   $("#slot").empty();
   $("#slot").append("<h1>Timeout</h1>");
-  
+  $("#slot").append(`<h1>The correct answer was "${rAnswer}"</h1>`);
+  $("#slot").append("<img src='https://media.giphy.com/media/ZEgBHVeRlmTqjCPlqx/giphy.gif'>");
   wrong++;
   onQuestion++;
+  setTimeout(nextQuestion,2500);
+}
+function nextQuestion() {
   renderQuestion(onQuestion);
 }
-
 function rightAnswer() {
+  $("#time-left").empty();
   clearInterval(intervalId);
   $("#slot").empty();
   $("#slot").append("<h1>correct!</h1>");
-  
+  $("#slot").append("<img src='https://media.giphy.com/media/rdma0nDFZMR32/giphy.gif'>");
   right++;
   onQuestion++;
-  renderQuestion(onQuestion);
+  setTimeout(nextQuestion,2500);
  
 }
 function wrongAnswer() {
+  $("#time-left").empty();
   clearInterval(intervalId);
   $("#slot").empty();
   $("#slot").append("<h1>Wrong!</h1>");
-  
+  $("#slot").append(`<h1>The correct answer was "${rAnswer}"</h1>`);
+  $("#slot").append("<img src='https://media.giphy.com/media/ZEgBHVeRlmTqjCPlqx/giphy.gif'>");
   wrong++;
   onQuestion++;
-  setTimeout(renderQuestion(onQuestion),5000);
+  setTimeout(nextQuestion,2500);
   
 }
 
